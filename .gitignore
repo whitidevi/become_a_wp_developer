@@ -1,0 +1,26 @@
+# ۱. همه‌چیز در ریشه را ایگنور کن
+/*
+
+# ۲. فقط اینها را باز کن (تا گیت داخلشان را ببیند)
+!/wp-content/
+!/.vscode/
+!/.gitignore
+
+# ۳. حالا محتویات wp-content را دوباره ببند
+/wp-content/*
+
+# ۴. فقط History را باز کن (و چون دیگر چیزی نبسته‌ایم، کل محتویاتش ترک می‌شود)
+!/wp-content/History/
+
+# ۵. فقط themes را باز کن
+!/wp-content/themes/
+
+# ۶. محتویات themes را ببند
+/wp-content/themes/*
+
+# ۷. فقط تم موردنظر را باز کن (کل محتویاتش ترک می‌شود)
+!/wp-content/themes/fictional-university-theme/
+
+# ۸. لاگ‌ها را ایگنور کن
+*.log
+
