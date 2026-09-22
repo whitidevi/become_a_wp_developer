@@ -30,5 +30,5 @@ function university_adjust_queries($query) {
     ));
   }
 }
-//Ordering or Sorting based on some custom fields
+
 add_action('pre_get_posts', 'university_adjust_queries');

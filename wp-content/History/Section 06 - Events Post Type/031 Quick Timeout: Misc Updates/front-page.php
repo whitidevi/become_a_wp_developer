@@ -16,32 +16,18 @@
         <div class="full-width-split__inner">
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 	  <?php
-	  $today = date('Ymd');
 	  $homePageEvents = new WP_Query(array(
 		'post_type' => 'event',
 		'posts_per_page' => 2,
-		'meta_key' => 'event_date',
-		'orderby' => 'meta_value_num', // or 'meta_value_num' for numbers. Custom Field
-		'order' => 'DESC',
-		'meta_query' => array(
-		    array(
-			    'key' => 'event_date', // If the key
-			    'compare' => '>=',  //is greater or equal than
-			    'value' => $today, // current date
-			    'type' => 'numeric' // because we are comparing numbers.
-			 ),
-		),
+		
 	  ));
 	  while($homePageEvents->have_posts()) {
 		$homePageEvents->the_post(); ?> 
 	  
           <div class="event-summary">
             <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month"><?php
-		$eventDate = new DateTime(get_field('event_date'));
-		echo $eventDate->format('M');
-	      ?></span>
-              <span class="event-summary__day"><?php echo $eventDate->format('d'); ?></span>
+              <span class="event-summary__month">Mar</span>
+              <span class="event-summary__day">25</span>
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
@@ -52,7 +38,7 @@
                 } ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
             </div>
           </div>
-	  <?php } wp_reset_postdata(); ?>
+	  <?php } ?>
 
           <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>

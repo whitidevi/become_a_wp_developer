@@ -21,7 +21,7 @@
 		'post_type' => 'event',
 		'posts_per_page' => 2,
 		'meta_key' => 'event_date',
-		'orderby' => 'meta_value_num', // or 'meta_value_num' for numbers. Custom Field
+		'orderby' => 'meta_value', // or 'meta_value_num' for numbers. Custom Field
 		'order' => 'DESC',
 		'meta_query' => array(
 		    array(

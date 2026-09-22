@@ -8,7 +8,6 @@ function university_post_types() {
 	  'title',
 	  'editor',
 	  'excerpt',
-	  'custom-fields',
 	), // If we want to use excerpt or etc., we must bring 'title' and 'editor'.
 	'rewrite' => array(
 	  'slug' => 'events',
