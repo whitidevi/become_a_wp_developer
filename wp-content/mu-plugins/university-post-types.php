@@ -58,6 +58,11 @@ function university_post_types() {
 	  'all_items' => 'All Professors',
 	  'singular_name' => 'professor',
 	),
+	'supports' => array(
+	    'title',
+	    'editor',
+	    'thumbnail',
+	),
 	'menu_icon' => 'dashicons-welcome-learn-more',
     ));
 }
