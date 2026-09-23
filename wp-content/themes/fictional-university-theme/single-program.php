@@ -23,6 +23,30 @@ while(have_posts()) {
 	<div class="generic-content"><?php the_content(); ?></div>
 
 	<?php
+	    $relatedProfessors = new WP_Query(array(
+		'post_type' => 'professor',
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'meta_query' => array(
+		    array(
+			'key' => 'related_programs',
+			'compare' => 'LIKE',
+			'value' => '"'.get_the_ID().'"',
+		    ),
+		),
+	    ));
+	    if ($relatedProfessors->have_posts()) {
+
+	      echo '<hr class="section-break">';
+	      echo '<h2 class="headline headline--medium">'.get_the_title().' Professors</h2>';
+	      while($relatedProfessors->have_posts()) {
+	          $relatedProfessors->the_post(); ?> 
+
+		      <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+	          <?php
+	      } wp_reset_postdata();
+	   }
+
     $today = date('Ymd');
     $homePageEvents = new WP_Query(array(
       'post_type' => 'event',
@@ -35,13 +59,13 @@ while(have_posts()) {
 	  'compare' => '>=',
 	  'value' => $today,
 	  'type' => 'numeric',
-	),
+	), // Condition1
 	array(
           'key' => 'related_programs',
           'compare' => 'LIKE',
           'value' => '"'.get_the_ID().'"',
-        ),
-      ),
+        ), // Condition2
+      ), // if (Condition1 && Condition2) 
     ));
 
     if ($homePageEvents->have_posts()) {
@@ -49,7 +73,7 @@ while(have_posts()) {
       echo '<hr class="section-break">';
       echo '<h2 class="headline headline--medium">Upcoming '.get_the_title().' Events</h2>';
       while($homePageEvents->have_posts()) {
-                $homePageEvents->the_post(); ?> 
+          $homePageEvents->the_post(); ?> 
 
           <div class="event-summary">
             <a class="event-summary__date t-center" href="#">

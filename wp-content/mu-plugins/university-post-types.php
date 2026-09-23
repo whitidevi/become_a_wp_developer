@@ -43,8 +43,22 @@ function university_post_types() {
 	'supports' => array(
 	  'title',
 	  'editor',
-	),
+	), // This is already a default. No need to insert.
 	'menu_icon' => 'dashicons-awards',
+    ));
+
+	// professor Post Type
+    register_post_type('professor', array(
+	'public' => true,
+	'show_in_rest' => true,
+	'labels' => array(
+	  'name' => 'Professor',
+	  'add_new_item' => 'Add New Professor',
+	  'edit_item' => 'Edit Professor',
+	  'all_items' => 'All Professors',
+	  'singular_name' => 'professor',
+	),
+	'menu_icon' => 'dashicons-welcome-learn-more',
     ));
 }
 
