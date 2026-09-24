@@ -32,6 +32,8 @@ while(have_posts()) {
 	    echo '<ul class="link-list min-list">';
 	    foreach ($relatedPrograms as $program) { ?>
               <li><a href="<?php echo get_the_permalink($program); ?>"><?php echo get_the_title($program); ?></a></li>
+			  <!-- Also can use: echo $program->post_title;
+			       Use 'print_r()' or 'var_dump()' to see what's within the post object. -->
 	    <?php }
 	    echo '</ul>';
 	  }
