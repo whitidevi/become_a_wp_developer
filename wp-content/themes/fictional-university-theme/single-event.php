@@ -23,7 +23,9 @@ while(have_posts()) {
       <div class="generic-content"><?php the_content(); ?></div>
 
 	<?php
-	  $relatedPrograms = get_field('related_programs');
+	  $relatedPrograms = get_field('related_programs'); // We will recieve an array of post objects. 
+	  // Because when I was creating this custom field in ACF, I determined that the return format be 'object post'
+	  // So when we have more than 1 post, we will recieve an array of object post. Because we are in php.
 	  if ($relatedPrograms) {
        	    echo '<hr class="section-break">';
     	    echo '<h2 class="headline headline--medium">Related Program(s)</h2>';
