@@ -22,7 +22,8 @@ while(have_posts()) {
 
 	<div class="generic-content"><?php the_content(); ?></div>
 
-	<?php
+	<?php // We want to show the related professors to the current program.
+		  // Use custom queries for this purpose. Because we want to fetch different results (to the main query) from another Table(s).
 	    $relatedProfessors = new WP_Query(array(
 		'post_type' => 'professor',
 		'orderby' => 'title',
@@ -35,8 +36,8 @@ while(have_posts()) {
 		    ),
 		),
 	    ));
-	    if ($relatedProfessors->have_posts()) {
-
+	    if ($relatedProfessors->have_posts()) { // Use '$...->have_posts()' because we are dealing with a query object. It is different to an Array object.
+		  // The 'have_posts()' or 'the_post()' executes on the main query lonely. But they are the inner functions of the WP_Query() object.
 	      echo '<hr class="section-break">';
 	      echo '<h2 class="headline headline--medium">'.get_the_title().' Professors</h2>';
 	      echo '<ul class="professor-cards">';
@@ -50,11 +51,11 @@ while(have_posts()) {
 			</a>
 		      </li>
 	          <?php
-	      } wp_reset_postdata();
+	      } wp_reset_postdata(); // We must use this function after looping on a custom query to reset the 'current global post varible'.
 	      echo '</ul>';
 	   }
 
-    $today = date('Ymd');
+    $today = date('Ymd'); // Showing the related events to the current program.
     $homePageEvents = new WP_Query(array(
       'post_type' => 'event',
       'meta_key' => 'event_date',
@@ -73,6 +74,8 @@ while(have_posts()) {
           'value' => '"'.get_the_ID().'"',
         ), // Condition2
       ), // if (Condition1 && Condition2) 
+		//the 'meta_query' is equivalent to the 'if statement'.
+		// And the arrays within it are equivalent to the conditions within the if statement.
     ));
 
     if ($homePageEvents->have_posts()) {
