@@ -33,26 +33,18 @@
 		),
 	  ));
 	  while($homePageEvents->have_posts()) {
-		$homePageEvents->the_post(); ?> 
-	  
-          <div class="event-summary">
-            <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month"><?php
-		$eventDate = new DateTime(get_field('event_date'));
-		echo $eventDate->format('M');
-	      ?></span>
-              <span class="event-summary__day"><?php echo $eventDate->format('d'); ?></span>
-            </a>
-            <div class="event-summary__content">
-              <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-              <p><?php if (has_excerpt()) {
-                    echo get_the_excerpt(); //To avoid the vertical gap of "the_excerpt()"
-                } else { 
-                    echo wp_trim_words(get_the_content(), 18);
-                } ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
-            </div>
-          </div>
-	  <?php } wp_reset_postdata(); ?>
+		$homePageEvents->the_post();
+		get_template_part('template-parts/content', 'event'); // Loads the file/template-part in/inside the 'template-parts/' named 'event-exerpt.php'
+		// In WordPress, 'slug-name.php' pattern is very common.Because WordPress's naming convention is kebab case(Lowers with dash/hiphen).
+		// you pass the slug('event') and the name('excerpt') and WordPress combines them into the full filename (event-excerpt.php).
+		// Note: the '.php' extention is never included.
+		// We can use this feature to write cleaner code. For example: get_template_part('template-parts/content', get_post_type());
+		// This works with template files that follow the same naming pattern, such as/It matches naming pattern of files like:
+		// content-event.php, content-post.php, content-program.php
+		// It dynamically loads 'template-parts/content-{post-type}.php',
+		// If the specific file doesn't exist (e.g. 'content-event.php'), WP automatically falls back to 'template-parts/content.php'
+		// Note: get_post_type() works inside the loop (safer), where global $post is set.
+	  } wp_reset_postdata(); ?>
 
           <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
