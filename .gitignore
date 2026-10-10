@@ -26,3 +26,6 @@
 
 # 9. must-use-plugins folder added at section 06, lesson 1.
 !/wp-content/mu-plugins/
+
+# 10. بسته های جاوااسکریپت دانلود شده توسط وردپرس را در نظر نگیر
+/wp-content/themes/fictional-university-theme/node_modules/*
